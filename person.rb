@@ -10,4 +10,10 @@ class Person
     @name = name
     @parent_permission = parent_permission
   end
+
+  private
+  def is_of_age
+    if @age< 18
+       false
+    else true
 end

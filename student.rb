@@ -2,7 +2,7 @@
 
 require_relative 'person'
 
-# Define Person class
+# Define Student class
 class Student < Person
   def initialize(age, name, classroom)
     super(age, name)

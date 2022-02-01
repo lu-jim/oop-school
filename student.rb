@@ -2,13 +2,14 @@
 
 require_relative 'person'
 
-# Define Student class
+# Define Person class
 class Student < Person
-  def initialize(name, classroom)
-    super(name)
+  def initialize(age, name, classroom)
+    super(age, name)
     @classroom = classroom
   end
-end
 
-test = Student.new('Luis', '4-B')
-puts(test)
+  def play_hooky
+    "¯\(ツ)/¯"
+  end
+end

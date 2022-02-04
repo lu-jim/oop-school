@@ -5,6 +5,6 @@ class Corrector
   end
 
   def correct_name
-    @name.capitalize[0, 9]
+    @name.capitalize[0, 10]
   end
 end

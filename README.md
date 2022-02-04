@@ -1,6 +1,6 @@
+![](https://img.shields.io/badge/Microverse-blueviolet)
 # oop-school
 A tool made with Ruby to record what books are in a library and who borrows them.
-![](https://img.shields.io/badge/Microverse-blueviolet)
 ## Built With
 
 - Ruby

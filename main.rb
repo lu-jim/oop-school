@@ -60,6 +60,51 @@ Please choose an option by entering a number:'
     end
     run
   end
+
+  def create_person
+    print 'Do you want to create a student (1) or a teacher (2) [Input the number]:'
+    option = gets.chomp
+    case option
+    when '1' then create_student
+    when '2' then create_teacher
+    else
+      puts 'Please enter a valid number'
+      create_person
+    end
+  end
+
+  def create_student
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    print 'Has parent permission: [y/n]'
+    permission = gets.chomp.downcase
+    @people << Student.new(age, name, permission)
+    puts 'Student has been created successfully'
+    run
+  end
+
+  def create_teacher
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    print 'Specialization: '
+    spec = gets.chomp
+    @people << Teacher.new(age, name, spec)
+    puts 'Teacher has been created successfully'
+    run
+  end
+
+  def create_book
+  end
+
+  def create_rental
+  end
+
+  def show_rentals
+  end
 end
 
 def main

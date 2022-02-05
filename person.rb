@@ -1,4 +1,5 @@
 require_relative 'corrector'
+require 'securerandom'
 
 # Define Person class
 class Person
@@ -6,13 +7,16 @@ class Person
   attr_accessor :name, :age
   attr_writer :id
 
-  def initialize(age, name = 'Unknown', parent_permission: true)
+  # rubocop:disable Style/OptionalBooleanParameter
+  def initialize(age, name = 'Unknown', parent_permission = true)
+    @id = SecureRandom.hex(2)
     @age = age
     @name = name
-    @parent_permission = parent_permission
+    @parent_permission = true && parent_permission
     @corrector = Corrector.new(@name)
     @rentals = []
   end
+  # rubocop:enable Style/OptionalBooleanParameter
 
   def can_use_services
     of_age || @parent_permission

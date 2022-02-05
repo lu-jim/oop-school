@@ -98,6 +98,13 @@ Please choose an option by entering a number:'
   end
 
   def create_book
+    print 'Title: '
+    title = gets.chomp
+    print 'Author: '
+    author = gets.chomp
+    @books << Book.new(title, author)
+    puts 'Book has been created successfully'
+    run
   end
 
   def create_rental

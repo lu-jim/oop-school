@@ -36,13 +36,20 @@ Please choose an option by entering a number:'
 
   def serve(option)
     case option
-    when 1 then puts 'show_books'
-    when 2 then puts 'show_people'
-    when 3 then puts 'create_person'
-    when 4 then puts 'create_book'
-    when 5 then puts 'create_rental'
-    when 6 then puts 'show_rentals'
+    when 1 then puts show_books
+    when 2 then puts show_people
+    when 3 then puts create_person
+    when 4 then puts create_book
+    when 5 then puts create_rental
+    when 6 then puts show_rentals
     else puts 'Thank you for using this app'
+    end
+  end
+
+  def show_books
+    puts '  Title  | Author'
+    @books.each_with_index do |book, index|
+      puts "#{index + 1}. #{book.title} | #{book.author}"
     end
   end
 end

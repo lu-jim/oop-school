@@ -3,9 +3,8 @@ require 'securerandom'
 
 # Define Person class
 class Person
-  attr_reader :rentals
+  attr_reader :rentals, :id, :type
   attr_accessor :name, :age
-  attr_writer :id
 
   # rubocop:disable Style/OptionalBooleanParameter
   def initialize(age, name = 'Unknown', parent_permission = true)

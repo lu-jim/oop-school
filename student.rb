@@ -1,5 +1,5 @@
 class Student < Person
-  attr_reader :classroom
+  attr_reader :classroom, :type
 
   # rubocop:disable Style/OptionalBooleanParameter
   def initialize(age, name = 'Unknown', parent_permission = true)

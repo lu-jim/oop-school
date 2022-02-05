@@ -26,9 +26,23 @@ Please choose an option by entering a number:'
       puts "#{index + 1} - #{option}"
     end
     option = gets.chomp.to_i
-    unless valid_options.include? option
-      puts 'Please enter a valid number'
+    if valid_options.include? option
+      serve(option)
+    else
+      puts 'Please enter a valid option'
       run
+    end
+  end
+
+  def serve(option)
+    case option
+    when 1 then puts 'show_books'
+    when 2 then puts 'show_people'
+    when 3 then puts 'create_person'
+    when 4 then puts 'create_book'
+    when 5 then puts 'create_rental'
+    when 6 then puts 'show_rentals'
+    else puts 'Thank you for using this app'
     end
   end
 end

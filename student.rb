@@ -1,7 +1,3 @@
-require_relative 'person'
-require_relative 'classroom'
-
-# Define Student class
 class Student < Person
   attr_reader :classroom
 

@@ -1,6 +1,13 @@
 class Student < Person
   attr_reader :classroom
 
+  # rubocop:disable Style/OptionalBooleanParameter
+  def initialize(age, name = 'Unknown', parent_permission = true)
+    super
+    @type = 'Student'
+  end
+  # rubocop:enable Style/OptionalBooleanParameter
+
   def play_hooky
     "¯\(ツ)/¯"
   end

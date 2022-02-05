@@ -52,6 +52,13 @@ Please choose an option by entering a number:'
       puts "#{index + 1}. #{book.title} | #{book.author}"
     end
   end
+
+  def show_people
+    puts '  Title  | Author'
+    @books.each_with_index do |book, index|
+      puts "#{index + 1}. #{book.title} | #{book.author}"
+    end
+  end
 end
 
 def main

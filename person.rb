@@ -14,6 +14,7 @@ class Person
     @name = name
     @parent_permission = true && parent_permission
     @corrector = Corrector.new(@name)
+    @type = 'Person'
     @rentals = []
   end
   # rubocop:enable Style/OptionalBooleanParameter

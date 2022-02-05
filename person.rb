@@ -2,6 +2,7 @@ require_relative 'corrector'
 
 # Define Person class
 class Person
+  attr_reader :rentals
   attr_accessor :name, :age
   attr_writer :id
 
@@ -10,6 +11,7 @@ class Person
     @name = name
     @parent_permission = parent_permission
     @corrector = Corrector.new(@name)
+    @rentals = []
   end
 
   def can_use_services
@@ -18,6 +20,11 @@ class Person
 
   def validate_name
     @name = @corrector.correct_name
+  end
+
+  def add_rental(rental)
+    @rentals.push(rental)
+    rental.person = self
   end
 
   private

@@ -18,7 +18,8 @@ class App
     options = ['List all books', 'List all people', 'Create a person', 'Create a book',
                'Create a rental', 'List all rentals for a given person id', 'Exit']
     valid_options = (1..7).to_a
-    puts 'Welcome to School Library App! \n Please choose an option by entering a number:'
+    puts 'Welcome to School Library App!
+    Please choose an option by entering a number:'
     options.each_with_index do |option, index|
       puts "#{index + 1} - #{option}"
     end
@@ -165,7 +166,7 @@ class App
     else
       puts 'Enter ID of Person'
       renter_id = gets.chomp
-      renter = @people.select { |person| person.id == renter_id }[0]
+      renter = @people.select.with_index { |person, index| person.id == renter_id || index == renter_id.to_i }[0]
       if renter.nil?
         puts 'ID not found'
       else
@@ -181,6 +182,7 @@ class App
 end
 
 # rubocop:enable Metrics/ClassLength
+
 def main
   app = App.new
   app.run

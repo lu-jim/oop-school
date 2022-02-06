@@ -47,16 +47,24 @@ Please choose an option by entering a number:'
   end
 
   def show_books
-    puts '  Title  | Author'
-    @books.each_with_index do |book, index|
-      puts "#{index + 1}. #{book.title} | #{book.author}"
+    if @books.empty?
+      puts 'No Books Found'
+    else
+      puts '  Title  | Author'
+      @books.each_with_index do |book, index|
+        puts "#{index + 1}. #{book.title} | #{book.author}"
+      end
     end
     run
   end
 
   def show_people
-    @people.each_with_index do |person, index|
-      puts "[#{person.type}]  #{index + 1}. Name: #{person.name} | ID: #{person.id} | Age: #{person.age}"
+    if @people.empty?
+      puts 'No People Found'
+    else
+      @people.each_with_index do |person, index|
+        puts "[#{person.type}]  #{index + 1}. Name: #{person.name} | ID: #{person.id} | Age: #{person.age}"
+      end
     end
     run
   end
@@ -106,12 +114,55 @@ Please choose an option by entering a number:'
     puts 'Book has been created successfully'
     run
   end
+  # rubocop:disable Metrics/MethodLength
 
   def create_rental
+    if @books.empty?
+      puts 'No books available for rent'
+    elsif @people.empty?
+      puts 'No people available for renting'
+    else
+      puts 'Select a book from the following list by number'
+      @books.each_with_index do |book, index|
+        puts "#{index + 1}. #{book.title} | #{book.author}"
+      end
+      rented_book = gets.chomp.to_i - 1
+      validate_book(rented_book)
+      puts 'Select a person from the following list by number'
+      @people.each_with_index do |person, index|
+        puts "[#{person.type}]  #{index + 1}. Name: #{person.name} | ID: #{person.id} | Age: #{person.age}"
+      end
+      renter = gets.chomp.to_i - 1
+      validate_people(renter)
+      puts 'Enter date'
+      date = gets.chomp
+      new_rental = Rental.new(date, @people[renter], @books[rented_book])
+      @people[renter].add_rental(new_rental)
+      @books[rented_book].add_rental(new_rental)
+      @rentals << new_rental
+      puts 'Rental has been created successfully'
+    end
+    run
+  end
+  # rubocop:enable Metrics/MethodLength
+
+  def validate_book(book)
+    valid_books = (1..@books.length).to_a
+    return unless valid_books.include?(book)
+
+    puts 'Please enter a valid book'
+    create_rental
   end
 
-  def show_rentals
+  def validate_people(person)
+    valid_people = (1..@people.length).to_a
+    return unless valid_people.include?(person)
+
+    puts 'Please enter a valid user'
+    create_rental
   end
+
+  def show_rentals; end
 end
 
 def main

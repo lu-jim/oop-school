@@ -1,17 +1,19 @@
-require_relative 'person'
-require_relative 'classroom'
-
-# Define Student class
 class Student < Person
-  attr_reader :classroom
+  attr_reader :classroom, :type
 
-  def initialize(age, name, classroom)
-    super(age, name)
-    @classroom = classroom
-    classroom.students.push(self) unless classroom.students.include?(self)
+  # rubocop:disable Style/OptionalBooleanParameter
+  def initialize(age, name = 'Unknown', parent_permission = true)
+    super
+    @type = 'Student'
   end
+  # rubocop:enable Style/OptionalBooleanParameter
 
   def play_hooky
     "¯\(ツ)/¯"
+  end
+
+  def classroom=(classroom)
+    @classroom = classroom
+    classroom.students.push(self) unless classroom.students.include?(self)
   end
 end

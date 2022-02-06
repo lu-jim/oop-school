@@ -4,7 +4,7 @@ require './rental'
 require './classroom'
 require './student'
 require './teacher'
-
+# rubocop:disable Metrics/ClassLength
 class App
   attr_accessor :books, :people, :rentals
 
@@ -15,13 +15,10 @@ class App
   end
 
   def run
-    options = [
-      'List all books', 'List all people', 'Create a person', 'Create a book',
-      'Create a rental', 'List all rentals for a given person id', 'Exit'
-    ]
+    options = ['List all books', 'List all people', 'Create a person', 'Create a book',
+               'Create a rental', 'List all rentals for a given person id', 'Exit']
     valid_options = (1..7).to_a
-    puts 'Welcome to School Library App!
-Please choose an option by entering a number:'
+    puts 'Welcome to School Library App! \n Please choose an option by entering a number:'
     options.each_with_index do |option, index|
       puts "#{index + 1} - #{option}"
     end
@@ -147,7 +144,7 @@ Please choose an option by entering a number:'
   # rubocop:enable Metrics/MethodLength
 
   def validate_book(book)
-    valid_books = (1..@books.length).to_a
+    valid_books = (1..@books.length + 1).to_a
     return unless valid_books.include?(book)
 
     puts 'Please enter a valid book'
@@ -155,16 +152,35 @@ Please choose an option by entering a number:'
   end
 
   def validate_people(person)
-    valid_people = (1..@people.length).to_a
+    valid_people = (1..@people.length + 1).to_a
     return unless valid_people.include?(person)
 
     puts 'Please enter a valid user'
     create_rental
   end
 
-  def show_rentals; end
+  def show_rentals
+    if @rentals.empty?
+      puts 'No rentals found'
+    else
+      puts 'Enter ID of Person'
+      renter_id = gets.chomp
+      renter = @people.select { |person| person.id == renter_id }[0]
+      if renter.nil?
+        puts 'ID not found'
+      else
+        puts renter.rentals.length
+        @rentals.each do |rental|
+          puts "Rental date: #{rental.date}
+        Rented book: #{rental.book.title} by #{rental.book.author}"
+        end
+      end
+    end
+    run
+  end
 end
 
+# rubocop:enable Metrics/ClassLength
 def main
   app = App.new
   app.run
